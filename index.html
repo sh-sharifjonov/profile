@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shuhrat Sharifjonov | C# .NET Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --text: #222;
+      --card: #fff;
+      --accent: #0078d7;
+      --accent-hover: #005fa3;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #eaeaea;
+      --card: #1e1e1e;
+      --accent: #00bfff;
+      --accent-hover: #0099cc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      background: var(--card);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: background 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent-hover);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      background: var(--card);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: background 0.3s ease;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skills span {
+      background: var(--accent);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text);
+      opacity: 0.7;
+      background: var(--card);
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <header>
+    <h1>Shuhrat Sharifjonov</h1>
+    <p>C# / .NET / Web API / ASP.Net</p>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Switch theme</button>
+  </header>
+
+  <nav>
+    <a href="#about">About me</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contacts</a>
+  </nav>
+
+  <section id="about">
+    <h2>About me</h2>
+    <p>I am a backend developer with a focus on C# and .NET. I specialize in building APIs, microservice architecture, and integrations. I use modern practices: Clean Architecture, DI, Unit Testing, CI/CD. I am constantly learning new approaches and technologies.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Eskhata.Avia</strong> — ASP.NET Core Web API + EF Core + PostgreSQL, Swagger UI.</li>
+      <li><strong>Eskhata.Afisha</strong> — ASP.NET Core Web API + EF Core + PostgreSQL, Swagger UI.</li>
+      <li><strong>Eskhata.Food</strong> — ASP.NET Core Web API + EF Core + PostgreSQL, Swagger UI.</li>
+    </ul>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <span>C#</span>
+      <span>.NET 3.1/5/6/7/8</span>
+      <span>ASP.NET Core / MVC</span>
+      <span>Entity Framework</span>
+      <span>OOP</span>
+      <span>REST API</span>
+      <span>gRpc</span>
+      <span>PostgreSQL</span>
+      <span>Microsoft SQL Server</span>
+      <span>Docker</span>
+      <span>Git</span>
+      <span>Clean Architecture</span>
+      <span>UX / UI</span>
+      <span>HTML / CSS / JS</span>
+      <span>IIS</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contacts</h2>
+    <p>Email: shuhratjon.sharifjonov@gmail.com</p>
+    <p>GitHub: <a href="https://github.com/sh-sharifjonov" target="_blank">sh-sharifjonov</a></p>
+    <p>Telegram: <a href="https://t.me/shuhrat_sharifjonov" target="_blank">shuhrat_sharifjonov</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/shuhrat-sharifjonov-389a16243" target="_blank">shuhrat-sharifjonov</a></p>
+  </section>
+
+  <footer>
+    &copy; 2025 Shuhrat Sharifjonov | C# .NET Developer
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.body.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      document.body.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    }
+
+    // Load stored theme
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.body.setAttribute("data-theme", savedTheme);
+    }
+  </script>
+
+</body>
+</html>
