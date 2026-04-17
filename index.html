@@ -4,22 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shuhrat Sharifjonov | C# .NET Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f9f9f9;
-      --text: #222;
-      --card: #fff;
-      --accent: #0078d7;
-      --accent-hover: #005fa3;
+      --bg: #f5f7ff;
+      --bg-soft: #eef1ff;
+      --surface: rgba(255, 255, 255, 0.8);
+      --surface-solid: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #4f46e5;
+      --accent-2: #0ea5e9;
+      --border: rgba(99, 102, 241, 0.2);
+      --shadow: 0 20px 45px rgba(79, 70, 229, 0.15);
     }
 
     [data-theme="dark"] {
-      --bg: #121212;
-      --text: #eaeaea;
-      --card: #1e1e1e;
-      --accent: #00bfff;
-      --accent-hover: #0099cc;
+      --bg: #050816;
+      --bg-soft: #0b1226;
+      --surface: rgba(15, 23, 42, 0.74);
+      --surface-solid: #0f172a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #8b5cf6;
+      --accent-2: #22d3ee;
+      --border: rgba(167, 139, 250, 0.3);
+      --shadow: 0 24px 50px rgba(2, 8, 23, 0.55);
     }
 
     * {
@@ -34,209 +46,464 @@
 
     body {
       font-family: "Inter", sans-serif;
-      background: var(--bg);
       color: var(--text);
-      transition: background 0.3s ease, color 0.3s ease;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.14), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(14, 165, 233, 0.18), transparent 25%),
+        linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 52%, var(--bg) 100%);
+      min-height: 100vh;
+      transition: background 0.35s ease, color 0.35s ease;
+      line-height: 1.6;
     }
 
-    header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      background: var(--card);
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
     }
 
-    header h1 {
-      font-size: 2.8rem;
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .glass:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 26px 54px rgba(79, 70, 229, 0.18);
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 40;
+      margin: 16px auto 0;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
       font-weight: 700;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      color: var(--accent);
-    }
-
-    .theme-toggle {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      margin-top: 1.5rem;
-      transition: background 0.3s ease;
-    }
-
-    .theme-toggle:hover {
-      background: var(--accent-hover);
+      letter-spacing: 0.02em;
+      font-size: 0.95rem;
     }
 
     nav {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-      background: var(--card);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      align-items: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
     }
 
     nav a {
       text-decoration: none;
-      color: var(--text);
+      color: var(--muted);
       font-weight: 600;
-      transition: color 0.2s;
+      font-size: 0.9rem;
+      padding: 0.45rem 0.7rem;
+      border-radius: 12px;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
     nav a:hover {
-      color: var(--accent);
+      color: var(--text);
+      background: rgba(79, 70, 229, 0.12);
+      transform: translateY(-1px);
     }
 
-    section {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background: var(--card);
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: background 0.3s ease;
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: var(--surface-solid);
+      color: var(--text);
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.85rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .hero {
+      margin-top: 2rem;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      line-height: 1.12;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .accent-text {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-actions {
+      margin-top: 1.4rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 0.72rem 1rem;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      box-shadow: 0 14px 24px rgba(79, 70, 229, 0.25);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border-color: var(--border);
+      background: var(--surface-solid);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: saturate(1.08);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(79, 70, 229, 0.12), rgba(14, 165, 233, 0.08));
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      margin: 2.2rem auto 3rem;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .section {
+      padding: 1.6rem;
     }
 
     h2 {
-      font-size: 1.8rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.01em;
     }
 
-    ul {
-      padding-left: 1.5rem;
-      line-height: 1.8;
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .project-card {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-solid);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(79, 70, 229, 0.45);
+      box-shadow: 0 14px 28px rgba(79, 70, 229, 0.16);
+    }
+
+    .project-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .project-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
     }
 
     .skills {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.55rem;
     }
 
     .skills span {
-      background: var(--accent);
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-solid);
+      padding: 0.45rem 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      color: var(--text);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .skills span:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .contact-list a {
+      color: var(--accent);
+      text-decoration: none;
+      width: fit-content;
+      font-weight: 600;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
-      color: var(--text);
-      opacity: 0.7;
-      background: var(--card);
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+      color: var(--muted);
+      padding: 1.5rem 0 2.4rem;
+      font-size: 0.9rem;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px) scale(0.99);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2rem;
+    .delay-1 { transition-delay: 0.05s; }
+    .delay-2 { transition-delay: 0.1s; }
+    .delay-3 { transition-delay: 0.15s; }
+    .delay-4 { transition-delay: 0.2s; }
+
+    @media (max-width: 900px) {
+      .topbar {
+        top: 10px;
+        padding: 0.8rem;
       }
 
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
       nav {
-        flex-direction: column;
-        gap: 1rem;
+        justify-content: center;
+      }
+
+      .brand {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body data-theme="light">
+  <div class="container">
+    <header class="topbar glass reveal">
+      <div class="brand">Shuhrat Sharifjonov</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" type="button">Dark Mode</button>
+    </header>
 
-  <header>
-    <h1>Shuhrat Sharifjonov</h1>
-    <p>C# / .NET / Web API / ASP.Net</p>
-    <button class="theme-toggle" onclick="toggleTheme()">🌓 Switch theme</button>
-  </header>
+    <section class="hero glass reveal delay-1">
+      <div>
+        <h1>
+          Building robust backend systems with
+          <span class="accent-text">C# and .NET</span>
+        </h1>
+        <p>
+          Backend developer focused on scalable Web API services, clean architecture, and reliable integrations.
+          I turn business requirements into maintainable production-ready systems.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="#contact">Contact Me</a>
+        </div>
+      </div>
 
-  <nav>
-    <a href="#about">About me</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contacts</a>
-  </nav>
+      <div class="stats">
+        <div class="stat">
+          <strong>10+</strong>
+          <span>Core technologies</span>
+        </div>
+        <div class="stat">
+          <strong>.NET 8</strong>
+          <span>Modern stack</span>
+        </div>
+        <div class="stat">
+          <strong>API First</strong>
+          <span>Architecture approach</span>
+        </div>
+        <div class="stat">
+          <strong>CI/CD</strong>
+          <span>Delivery mindset</span>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>About me</h2>
-    <p>I am a backend developer with a focus on C# and .NET. I specialize in building APIs, microservice architecture, and integrations. I use modern practices: Clean Architecture, DI, Unit Testing, CI/CD. I am constantly learning new approaches and technologies.</p>
-  </section>
+    <main class="grid">
+      <section id="about" class="section glass reveal delay-1">
+        <h2>About Me</h2>
+        <p>
+          I am a backend developer specializing in C# and .NET. My key focus areas include Web API development,
+          microservice architecture, PostgreSQL and MSSQL data layers, and integration with external services.
+          I apply Clean Architecture, dependency injection, testing practices, and automation to deliver stable solutions.
+        </p>
+      </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>Eskhata.Avia</strong> — ASP.NET Core Web API + EF Core + PostgreSQL, Swagger UI.</li>
-      <li><strong>Eskhata.Afisha</strong> — ASP.NET Core Web API + EF Core + PostgreSQL, Swagger UI.</li>
-      <li><strong>Eskhata.Food</strong> — ASP.NET Core Web API + EF Core + PostgreSQL, Swagger UI.</li>
-    </ul>
-  </section>
+      <section id="projects" class="section glass reveal delay-2">
+        <h2>Projects</h2>
+        <div class="projects">
+          <article class="project-card reveal delay-1">
+            <h3>Eskhata.Avia</h3>
+            <p>ASP.NET Core Web API, EF Core, PostgreSQL, Swagger documentation.</p>
+          </article>
+          <article class="project-card reveal delay-2">
+            <h3>Eskhata.Afisha</h3>
+            <p>Service-oriented backend with REST endpoints and clean domain structure.</p>
+          </article>
+          <article class="project-card reveal delay-3">
+            <h3>Eskhata.Food</h3>
+            <p>Scalable API platform for food services with robust data access and versioning.</p>
+          </article>
+        </div>
+      </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <span>C#</span>
-      <span>.NET 3.1/5/6/7/8</span>
-      <span>ASP.NET Core / MVC</span>
-      <span>Entity Framework</span>
-      <span>OOP</span>
-      <span>REST API</span>
-      <span>gRpc</span>
-      <span>PostgreSQL</span>
-      <span>Microsoft SQL Server</span>
-      <span>Docker</span>
-      <span>Git</span>
-      <span>Clean Architecture</span>
-      <span>UX / UI</span>
-      <span>HTML / CSS / JS</span>
-      <span>IIS</span>
-    </div>
-  </section>
+      <section id="skills" class="section glass reveal delay-3">
+        <h2>Skills</h2>
+        <div class="skills">
+          <span>C#</span>
+          <span>.NET 6/7/8</span>
+          <span>ASP.NET Core</span>
+          <span>Web API</span>
+          <span>Entity Framework Core</span>
+          <span>Clean Architecture</span>
+          <span>PostgreSQL</span>
+          <span>MS SQL Server</span>
+          <span>Docker</span>
+          <span>Git</span>
+          <span>gRPC</span>
+          <span>CI/CD</span>
+        </div>
+      </section>
 
-  <section id="contact">
-    <h2>Contacts</h2>
-    <p>Email: shuhratjon.sharifjonov@gmail.com</p>
-    <p>GitHub: <a href="https://github.com/sh-sharifjonov" target="_blank">sh-sharifjonov</a></p>
-    <p>Telegram: <a href="https://t.me/shuhrat_sharifjonov" target="_blank">shuhrat_sharifjonov</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/shuhrat-sharifjonov-389a16243" target="_blank">shuhrat-sharifjonov</a></p>
-  </section>
+      <section id="contact" class="section glass reveal delay-4">
+        <h2>Contact</h2>
+        <div class="contact-list">
+          <div>Email: shuhratjon.sharifjonov@gmail.com</div>
+          <a href="https://github.com/sh-sharifjonov" target="_blank" rel="noreferrer">GitHub: sh-sharifjonov</a>
+          <a href="https://t.me/shuhrat_sharifjonov" target="_blank" rel="noreferrer">Telegram: @shuhrat_sharifjonov</a>
+          <a href="https://linkedin.com/in/shuhrat-sharifjonov-389a16243" target="_blank" rel="noreferrer">LinkedIn: shuhrat-sharifjonov</a>
+        </div>
+      </section>
+    </main>
 
-  <footer>
-    &copy; 2025 Shuhrat Sharifjonov | C# .NET Developer
-  </footer>
+    <footer>
+      &copy; 2026 Shuhrat Sharifjonov - C# .NET Developer
+    </footer>
+  </div>
 
   <script>
-    function toggleTheme() {
-      const currentTheme = document.body.getAttribute("data-theme");
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      document.body.setAttribute("data-theme", newTheme);
-      localStorage.setItem("theme", newTheme);
+    const body = document.body;
+    const toggleButton = document.getElementById("themeToggle");
+    const revealElements = document.querySelectorAll(".reveal");
+
+    function updateThemeButton(theme) {
+      toggleButton.textContent = theme === "dark" ? "Light Mode" : "Dark Mode";
     }
 
-    // Load stored theme
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      document.body.setAttribute("data-theme", savedTheme);
+    function setTheme(theme) {
+      body.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      updateThemeButton(theme);
     }
+
+    toggleButton.addEventListener("click", function () {
+      const currentTheme = body.getAttribute("data-theme");
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+      setTheme(nextTheme);
+    });
+
+    const storedTheme = localStorage.getItem("theme");
+    const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    setTheme(storedTheme || preferredTheme);
+
+    const revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealElements.forEach(function (element) {
+      revealObserver.observe(element);
+    });
   </script>
-
 </body>
 </html>
