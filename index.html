@@ -19,6 +19,10 @@
       --accent-2: #0ea5e9;
       --border: rgba(99, 102, 241, 0.2);
       --shadow: 0 20px 45px rgba(79, 70, 229, 0.15);
+      --spot-fill: rgba(79, 70, 229, 0.1);
+      --spot-border: rgba(79, 70, 229, 0.65);
+      --cursor-glow-1: rgba(79, 70, 229, 0.14);
+      --cursor-glow-2: rgba(14, 165, 233, 0.08);
     }
 
     [data-theme="dark"] {
@@ -32,6 +36,10 @@
       --accent-2: #22d3ee;
       --border: rgba(167, 139, 250, 0.3);
       --shadow: 0 24px 50px rgba(2, 8, 23, 0.55);
+      --spot-fill: rgba(139, 92, 246, 0.14);
+      --spot-border: rgba(167, 139, 250, 0.8);
+      --cursor-glow-1: rgba(139, 92, 246, 0.2);
+      --cursor-glow-2: rgba(34, 211, 238, 0.08);
     }
 
     * {
@@ -74,6 +82,77 @@
       transform: translateY(-3px);
       box-shadow: 0 26px 54px rgba(79, 70, 229, 0.18);
       border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    /* Cursor glow that follows the mouse across the page */
+    .cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 640px;
+      height: 640px;
+      margin: -320px 0 0 -320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--cursor-glow-1) 0%, var(--cursor-glow-2) 35%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      will-change: transform;
+    }
+
+    .cursor-glow.active {
+      opacity: 1;
+    }
+
+    /* Spotlight highlight inside cards, positioned via --mx / --my */
+    .spotlight {
+      position: relative;
+      isolation: isolate;
+      --spot-size: 420px;
+    }
+
+    .spotlight::before,
+    .spotlight::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .spotlight::before {
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(var(--spot-size) circle at var(--mx, 50%) var(--my, 50%), var(--spot-fill), transparent 65%);
+    }
+
+    .spotlight::after {
+      inset: -1px;
+      padding: 1px;
+      background: radial-gradient(calc(var(--spot-size) * 0.8) circle at var(--mx, 50%) var(--my, 50%), var(--spot-border), transparent 60%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .spotlight:hover::before,
+    .spotlight:hover::after,
+    .spot-group:hover .spotlight::after {
+      opacity: 1;
+    }
+
+    .spot-sm {
+      --spot-size: 160px;
+    }
+
+    @media (hover: none) {
+      .cursor-glow,
+      .spotlight::before,
+      .spotlight::after {
+        display: none;
+      }
     }
 
     .topbar {
@@ -354,8 +433,10 @@
   </style>
 </head>
 <body data-theme="light">
+  <div class="cursor-glow" aria-hidden="true"></div>
+
   <div class="container">
-    <header class="topbar glass reveal">
+    <header class="topbar glass reveal spotlight">
       <div class="brand">Shuhrat Sharifjonov</div>
       <nav>
         <a href="#about">About</a>
@@ -366,7 +447,7 @@
       <button id="themeToggle" class="theme-toggle" type="button">Dark Mode</button>
     </header>
 
-    <section class="hero glass reveal delay-1">
+    <section class="hero glass reveal delay-1 spotlight">
       <div>
         <h1>
           Building robust backend systems with
@@ -382,20 +463,20 @@
         </div>
       </div>
 
-      <div class="stats">
-        <div class="stat">
+      <div class="stats spot-group">
+        <div class="stat spotlight spot-sm">
           <strong>10+</strong>
           <span>Core technologies</span>
         </div>
-        <div class="stat">
+        <div class="stat spotlight spot-sm">
           <strong>.NET 8</strong>
           <span>Modern stack</span>
         </div>
-        <div class="stat">
+        <div class="stat spotlight spot-sm">
           <strong>API First</strong>
           <span>Architecture approach</span>
         </div>
-        <div class="stat">
+        <div class="stat spotlight spot-sm">
           <strong>CI/CD</strong>
           <span>Delivery mindset</span>
         </div>
@@ -403,7 +484,7 @@
     </section>
 
     <main class="grid">
-      <section id="about" class="section glass reveal delay-1">
+      <section id="about" class="section glass reveal delay-1 spotlight">
         <h2>About Me</h2>
         <p>
           I am a backend developer specializing in C# and .NET. My key focus areas include Web API development,
@@ -412,43 +493,43 @@
         </p>
       </section>
 
-      <section id="projects" class="section glass reveal delay-2">
+      <section id="projects" class="section glass reveal delay-2 spotlight">
         <h2>Projects</h2>
-        <div class="projects">
-          <article class="project-card reveal delay-1">
+        <div class="projects spot-group">
+          <article class="project-card reveal delay-1 spotlight">
             <h3>Eskhata.Avia</h3>
             <p>ASP.NET Core Web API, EF Core, PostgreSQL, Swagger documentation.</p>
           </article>
-          <article class="project-card reveal delay-2">
+          <article class="project-card reveal delay-2 spotlight">
             <h3>Eskhata.Afisha</h3>
             <p>Service-oriented backend with REST endpoints and clean domain structure.</p>
           </article>
-          <article class="project-card reveal delay-3">
+          <article class="project-card reveal delay-3 spotlight">
             <h3>Eskhata.Food</h3>
             <p>Scalable API platform for food services with robust data access and versioning.</p>
           </article>
         </div>
       </section>
 
-      <section id="skills" class="section glass reveal delay-3">
+      <section id="skills" class="section glass reveal delay-3 spotlight">
         <h2>Skills</h2>
-        <div class="skills">
-          <span>C#</span>
-          <span>.NET 6/7/8</span>
-          <span>ASP.NET Core</span>
-          <span>Web API</span>
-          <span>Entity Framework Core</span>
-          <span>Clean Architecture</span>
-          <span>PostgreSQL</span>
-          <span>MS SQL Server</span>
-          <span>Docker</span>
-          <span>Git</span>
-          <span>gRPC</span>
-          <span>CI/CD</span>
+        <div class="skills spot-group">
+          <span class="spotlight spot-sm">C#</span>
+          <span class="spotlight spot-sm">.NET 6/7/8</span>
+          <span class="spotlight spot-sm">ASP.NET Core</span>
+          <span class="spotlight spot-sm">Web API</span>
+          <span class="spotlight spot-sm">Entity Framework Core</span>
+          <span class="spotlight spot-sm">Clean Architecture</span>
+          <span class="spotlight spot-sm">PostgreSQL</span>
+          <span class="spotlight spot-sm">MS SQL Server</span>
+          <span class="spotlight spot-sm">Docker</span>
+          <span class="spotlight spot-sm">Git</span>
+          <span class="spotlight spot-sm">gRPC</span>
+          <span class="spotlight spot-sm">CI/CD</span>
         </div>
       </section>
 
-      <section id="contact" class="section glass reveal delay-4">
+      <section id="contact" class="section glass reveal delay-4 spotlight">
         <h2>Contact</h2>
         <div class="contact-list">
           <div>Email: shuhratjon.sharifjonov@gmail.com</div>
@@ -503,6 +584,67 @@
 
     revealElements.forEach(function (element) {
       revealObserver.observe(element);
+    });
+
+    const cursorGlow = document.querySelector(".cursor-glow");
+    const spotlightElements = document.querySelectorAll(".spotlight");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const pointer = { x: 0, y: 0 };
+    const glow = { x: 0, y: 0 };
+    let frameRequested = false;
+
+    function renderCursorEffects() {
+      frameRequested = false;
+
+      // Read all element positions first, then write, to avoid layout thrashing
+      const rects = Array.from(spotlightElements, function (element) {
+        return element.getBoundingClientRect();
+      });
+
+      spotlightElements.forEach(function (element, index) {
+        element.style.setProperty("--mx", pointer.x - rects[index].left + "px");
+        element.style.setProperty("--my", pointer.y - rects[index].top + "px");
+      });
+
+      // Let the page glow trail slightly behind the cursor
+      const ease = reduceMotion ? 1 : 0.18;
+      glow.x += (pointer.x - glow.x) * ease;
+      glow.y += (pointer.y - glow.y) * ease;
+      cursorGlow.style.transform = "translate(" + glow.x + "px, " + glow.y + "px)";
+
+      if (Math.abs(pointer.x - glow.x) > 0.5 || Math.abs(pointer.y - glow.y) > 0.5) {
+        requestCursorFrame();
+      }
+    }
+
+    function requestCursorFrame() {
+      if (!frameRequested) {
+        frameRequested = true;
+        requestAnimationFrame(renderCursorEffects);
+      }
+    }
+
+    document.addEventListener("pointermove", function (event) {
+      if (event.pointerType !== "mouse") {
+        return;
+      }
+
+      if (!cursorGlow.classList.contains("active")) {
+        glow.x = event.clientX;
+        glow.y = event.clientY;
+        cursorGlow.classList.add("active");
+      }
+
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      requestCursorFrame();
+    });
+
+    // Cards move under a still cursor while scrolling, so keep the highlight in place
+    window.addEventListener("scroll", requestCursorFrame, { passive: true });
+
+    document.documentElement.addEventListener("mouseleave", function () {
+      cursorGlow.classList.remove("active");
     });
   </script>
 </body>
